@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.ArrayList;
 
 /*
  * @author Matthias Gusenbauer, Wolfgang Hofer, Alexander Neff
@@ -8,8 +9,8 @@ public class Rehearsal extends Event{
 	
 	private int rent;
 
-	public Rehearsal(int duration, String location, Calendar date, int rent){
-		super(duration, location, date);
+	public Rehearsal(int duration, String location, Calendar date, int rent, ArrayList<Member> member){
+		super(duration, location, date, member);
 		
 		this.rent = rent;
 	}

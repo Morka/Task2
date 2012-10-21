@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.ArrayList;
 
 /*
  * @author Matthias Gusenbauer, Wolfgang Hofer, Alexander Neff
@@ -8,8 +9,8 @@ public class Gig extends Event{
 	
 	private int fee;
 	
-	public Gig(int duration, String location, Calendar date, int fee){
-		super(duration, location, date);
+	public Gig(int duration, String location, Calendar date, int fee, ArrayList<Member> member){
+		super(duration, location, date, member);
 		
 		this.fee = fee;
 	}

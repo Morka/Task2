@@ -182,48 +182,4 @@ public class Band {
 		
 	}
 	
-	public int sumOfCosts(Calendar fromDate, Calendar toDate){
-		int sumCosts = 0;
-				
-		fromDate.add(Calendar.DAY_OF_MONTH, -1);
-		toDate.add(Calendar.DAY_OF_MONTH, 1);
-		
-		for(Event r : this.eventList){
-			if(r instanceof Rehearsal && (r.getDate().after(fromDate) && r.getDate().before(toDate))) {
-				sumCosts += ((Rehearsal)r).getRent();
-			}
-			
-		}
-		
-		return sumCosts;
-	}
-	
-	public int sumOfEarnings(Calendar fromDate, Calendar toDate){
-		int sumEarnings = 0;
-		
-		fromDate.add(Calendar.DAY_OF_MONTH, -1);
-		toDate.add(Calendar.DAY_OF_MONTH, 1);
-		
-		for(Event r : this.eventList){
-			if(r instanceof Gig && (r.getDate().after(fromDate) && r.getDate().before(toDate))){
-				sumEarnings += ((Gig)r).getFee();
-			}
-		}
-		
-		return sumEarnings;
-	}
-	
-	public int sumOfAll(Calendar fromDate, Calendar toDate){
-		int sumAll = 0;
-		
-		sumAll = sumOfEarnings(fromDate, toDate);
-		
-		fromDate.add(Calendar.DAY_OF_MONTH, 1);
-		toDate.add(Calendar.DAY_OF_MONTH, -1);
-		
-		sumAll -= sumOfCosts(fromDate, toDate);
-		
-		return sumAll;
-	}
-
 }
