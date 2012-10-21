@@ -22,6 +22,7 @@ public abstract class Event{
 		this.location = location;
 		this.date = date;
 		this.member = new ArrayList<Member>(member);
+		this.prevEvents = new ArrayList<Event>();
 	}
 	
 	public String getLocation(){

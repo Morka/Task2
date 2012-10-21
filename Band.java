@@ -230,4 +230,56 @@ public class Band {
 		
 	}
 	
+	/**
+	 * Takes and old and a new event. Adds the old event to the oldEvent ArrayList and sets it in the new event
+	 * 
+	 * @param originalEvent	the original event we want to update
+	 * @param newEvent		the new event with the updated information
+	 */
+	public void updateEvent(Event originalEvent, Event newEvent){
+		
+		ArrayList<Event> tmpList;
+		
+		for(Event e : this.eventList){
+			
+			if(e == originalEvent){
+				
+				tmpList = e.getPreviousEvents(); //can that work as intended???? Oo
+				tmpList.add(originalEvent); //Ideas for deleted once? flag them as such?
+				newEvent.setPreviousEvents(tmpList);
+				e = newEvent;
+				
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * Uses the undoEvent and the undoLevel to get a previous state of an event and undo the changes
+	 * 
+	 * @param undoEvent	the event we want to undo a change
+	 * @param undoLevel	the level we want to undo
+	 */
+	public void undoEventChange(Event undoEvent, int undoLevel){
+		
+		ArrayList<Event> tmpList;
+		Event tmpEvent;
+		
+		for(Event e: this.eventList){ //and what about that??? 
+			
+			if(e == undoEvent){
+				
+				tmpList = e.getPreviousEvents();
+				tmpEvent = tmpList.get(undoLevel);
+				tmpList.remove(undoLevel);
+				tmpEvent.setPreviousEvents(tmpList);
+				e = tmpEvent;
+				
+			}
+			
+		}
+		
+	}
+	
 }
