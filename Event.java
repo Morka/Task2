@@ -12,6 +12,7 @@ public abstract class Event{
 	private String location; //location of the Event
 	private Calendar date; //date AND time of the Event
 	private ArrayList<Member> member; //member who are playing at this Event
+	private ArrayList<Event> prevEvents;
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -60,6 +61,26 @@ public abstract class Event{
 		}
 		
 		return playableSongs;
+	}
+	
+	/**
+	 * Sets an ArrayList<Event> that contains the previous versions of the events.
+	 * @param	eventList	an arraylist with the previous states of this event.
+	 */
+	public void setPreviousEvents(ArrayList<Event> eventList){
+		
+		this.prevEvents = eventList;
+		
+	}
+	
+	/**
+	 * Retrieves the ArrayList<Event> that contains the previous versions of the events.
+	 * @return		ArrayList<Event> with previous events
+	 */
+	public ArrayList<Event> getPreviousEvents(){
+		
+		return this.prevEvents;
+		
 	}
 	
 	public String toString(){
