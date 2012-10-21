@@ -8,53 +8,52 @@ import java.text.SimpleDateFormat;
 
 public class Band {
 	
-	private ArrayList<Member> memberList = new ArrayList<Member>(); 
-	//private ArrayList<Gig> gigList = new ArrayList<Gig>();
-	//private ArrayList<Rehearsal> rehearsalList = new ArrayList<Rehearsal>();
+	private ArrayList<Member> memberList = new ArrayList<Member>();
 	private ArrayList<Event> eventList = new ArrayList<Event>(); 
 	private ArrayList<Song> songList = new ArrayList<Song>();
-	
-	SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
 	
 	public Band(){
 	
 	}
+	
+	/**
+	 * Adds a member to the member ArrayList
+	 * 
+	 * @param newMember	a new member object
+	 */
 	
 	public void addMember(Member newMember){
 		
 		this.memberList.add(newMember);
 		
 	}
-
-	/*public void addGig(Gig newGig){
-		
-		this.gigList.add(newGig);
-		
-	}*
 	
-	public void addRehearsal(Rehearsal newRehearsal){
-		
-		this.rehearsalList.add(newRehearsal);
-		
-	}*/
-	
+	/**
+	 * Adds an event to the event ArrayList
+	 * 
+	 * @param newEvent	a new event object
+	 */
 	public void addEvent(Event newEvent){
 		
 		this.eventList.add(newEvent);
 		
 	}
 	
+	/**
+	 * Adds a song to the repertoire ArrayList
+	 * 
+	 * @param newSong	a new song for the bands repertoire
+	 */
 	public void addTrack(Song newSong){
 		
 		this.songList.add(newSong);
 		
 	}
 	
-	/*
+	/**
 	 * Shows Rehearsals on one specific Date
 	 * 
-	 * @param: 1 Specified Date
+	 * @param: Specified Date	a date on which rehearsals should happen
 	 * @return: retString (String which contains Rehearsals taking place at the time or null)
 	 */
  
@@ -72,10 +71,10 @@ public class Band {
 	}
 	
 	
-	/*
+	/**
 	 * Shows Rehearsals in a given time Period
 	 * 
-	 * @param: fromDate, toDate
+	 * @param: fromDate, toDate	two calendar objects which make a timespan in wich rehearsals should happen
 	 * @return: retString (String which contains Rehearsals taking place in the time Period or null)
 	 */
 	public String showRehearsals(Calendar fromDate, Calendar toDate){		
@@ -98,6 +97,12 @@ public class Band {
 		
 	}
 	
+	/**
+	 * Get the specific date and calls another method inside the class to create a return string
+	 * 
+	 * @param specificDate	a single date where a gig should happen
+	 * @return	returns a string with a list of all the gigs on specific date
+	 */
 	public String showGigs(Calendar specificDate){
 		
 		String retString = "";
@@ -108,6 +113,13 @@ public class Band {
 		
 	}
 	
+	/**
+	 * Uses two dates to get the Gigs from the specified timespan.
+	 * 
+	 * @param fromDate	beginn of the timespan
+	 * @param toDate	end of the timespan
+	 * @return			a printable string representation of the gigs
+	 */
 	public String showGigs(Calendar fromDate, Calendar toDate){
 		
 		String retString = "";
@@ -129,18 +141,47 @@ public class Band {
 	}
 	
 	
+	/**
+	 * Gets all events from a specified timespan and returns a printable string representation.
+	 * 
+	 * @param from	beginn date of the timespan
+	 * @param to	end date of the timespan
+	 * @return		a printable string representation of the events
+	 */
 	public String showEvents(Calendar from, Calendar to){
 	
-		String retString = "Rehearsals: \n";
+		/*String retString = "Rehearsals: \n";
 		retString = retString + this.showRehearsals(from, to);
 		
 		retString = retString + "Gigs: \n";
 		retString = retString + this.showGigs(from, to);
 		
+		return retString;*/
+		
+		String retString = "";
+		from.add(Calendar.DAY_OF_MONTH, -1);
+		to.add(Calendar.DAY_OF_MONTH, 1);
+
+		for(Event e : this.eventList){
+
+			if(e.getDate().after(from) && e.getDate().before(to)) {
+
+				retString = retString + e.toString() + "\n";
+
+			}
+
+		}
+		
 		return retString;
 		
 	}
 	
+	/**
+	 * Creates a printable string of members at a specific date
+	 * 
+	 * @param specificDate	the date when you want to get the member of the band
+	 * @return				a printable string of all the members
+	 */
 	public String showMember(Calendar specificDate){
 		
 		String retString = "";
@@ -159,6 +200,13 @@ public class Band {
 		
 	}
 	
+	/**
+	 * Shows the songs the band is able to play during a specified timeframe
+	 * 
+	 * @param fromDate	beginn date of the timeframe
+	 * @param toDate	end date of the timeframe
+	 * @return			a printable representation of all the songs the band is able to play
+	 */
 	public String showSongs(Calendar fromDate, Calendar toDate){
 		
 		String retString = "";
