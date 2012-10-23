@@ -11,6 +11,7 @@ public class Band {
 	private ArrayList<Member> memberList = new ArrayList<Member>();
 	private ArrayList<Event> eventList = new ArrayList<Event>(); 
 	private ArrayList<Song> songList = new ArrayList<Song>();
+	private ArrayList<Location> locationList = new ArrayList<Location>();
 	
 	public Band(){
 	
@@ -258,8 +259,8 @@ public class Band {
 	/**
 	 * Uses the undoEvent and the undoLevel to get a previous state of an event and undo the changes
 	 * 
-	 * @param undoEvent	the event we want to undo a change
-	 * @param undoLevel	the level we want to undo
+	 * @param undoEvent the event we want to undo a change
+	 * @param undoLevel the level we want to undo
 	 */
 	public void undoEventChange(Event undoEvent, int undoLevel){
 		
@@ -280,6 +281,26 @@ public class Band {
 			
 		}
 		
+	}
+	
+	public void addLocation(Location location){
+		locationList.add(location);
+	}
+	
+	public ArrayList<Location> infrastracture(ArrayList<String> listOfNeededThings){
+		ArrayList<Location> listOfGoodLocations = new ArrayList<Location>();
+		
+		if(listOfNeededThings == null){
+			return locationList;
+		}
+		
+		for(Location l: this.locationList){
+			if(l.neededInfrastructure(listOfNeededThings) == true){
+				listOfGoodLocations.add(l);
+			}
+		}
+		
+		return listOfGoodLocations;
 	}
 	
 }
