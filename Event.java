@@ -43,7 +43,7 @@ public abstract class Event{
 	}
 	
 	public String getStringOfSongsPlayable(){
-		String playableSongs = "";
+		String playableSongs = "No Songs Playable";
 			
 		Member theOne = member.get(0); //member must not be null!
 		
@@ -58,12 +58,6 @@ public abstract class Event{
 				if(!member.get(m).getSongsList().contains(pSongs.get(s))){
 					pSongs.remove(s);	
 				}
-				
-				/*for(int i = 0; i < theOne.getSongsList().size(); i++){
-					if(theOne.getSongsList().get(i) == member.get(m).getSongsList().get(s)){
-						playableSongs += theOne.getSongsList().get(i) + "\n";
-					}
-				}*/
 			}
 		}
 		for(Song s : pSongs){
@@ -74,29 +68,26 @@ public abstract class Event{
 	}
 	
 	
-	/*
 	public ArrayList<Song> getListOfSongsPlayable(){
-		ArrayList<Song> playableSongs = new ArrayList<Song>();
-		
+			
 		Member theOne = member.get(0); //member must not be null!
+		
+		ArrayList<Song> pSongs = new ArrayList<Song>(theOne.getSongsList());
 		
 		
 		for(int m = 1; m < member.size(); m++){
 			if(member.get(m) == null){
-				return playableSongs;
+				return theOne.getSongsList();
 			}
-			for(int s = 0; s < member.get(m).getSongsList().size(); s++){
-				for(int i = 0; i < theOne.getSongsList().size(); i++){
-					if(theOne.getSongsList().get(i) == member.get(m).getSongsList().get(s)){
-						playableSongs.add(theOne.getSongsList().get(i));
-					}
+			for(int s = 0; s < pSongs.size(); s++){
+				if(!member.get(m).getSongsList().contains(pSongs.get(s))){
+					pSongs.remove(s);	
 				}
 			}
 		}
 		
-		return playableSongs;
+		return pSongs;
 	}
-	*/
 	/**
 	 * Sets an ArrayList<Event> that contains the previous versions of the events.
 	 * @param	eventList	an arraylist with the previous states of this event.

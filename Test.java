@@ -85,6 +85,9 @@ public class Test{
 		
 		Gig gig1 = new Gig(2500, location1, date, 2000000, memberList1);
 		
+		/**
+		 * Anticipated Output: "name: Help, length 21"
+		 */
 		System.out.println("Songs that are playable");
 		System.out.println(gig1.getStringOfSongsPlayable());
 	}
