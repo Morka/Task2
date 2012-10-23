@@ -55,7 +55,7 @@ public abstract class Event{
 				return theOne.getSongsString();
 			}
 			for(int s = 0; s < pSongs.size(); s++){
-				if(member.get(m).getSongsList().contains(pSongs.get(s))){
+				if(!member.get(m).getSongsList().contains(pSongs.get(s))){
 					pSongs.remove(s);	
 				}
 				
