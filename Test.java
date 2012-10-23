@@ -90,5 +90,49 @@ public class Test{
 		 */
 		System.out.println("Songs that are playable");
 		System.out.println(gig1.getStringOfSongsPlayable());
+		
+		/*
+
+		WHUT! WORKS BIATCHES!@
+		
+		Expected output from the test case below:
+
+		GIGS:
+		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
+
+		Aktuelle Events:
+		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
+
+		Geaenderte Events:
+		Location: Arena, Duration: 2000, Date: 24.10.2012, Fee: 2000000
+
+		Rueckgaengiggemachte Eventaenderung:
+		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
+
+		Events nach loeschen:
+
+		Events nach recovery:
+		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
+
+
+		 */
+		band.addEvent(gig1);
+		System.out.println("GIGS:");
+		System.out.println(band.showEvents());
+		Gig newGig = new Gig(2000, location2, date, 2000000, memberList1);
+		System.out.println("Aktuelle Events:");
+		System.out.println(band.showEvents());
+		band.updateEvent(gig1, newGig);
+		System.out.println("Geaenderte Events:");
+		System.out.println(band.showEvents());
+		band.undoEventChange(newGig, 0);
+		System.out.println("Rueckgaengiggemachte Eventaenderung:");
+		System.out.println(band.showEvents());
+		System.out.println("Events nach loeschen:");
+		band.deleteEvent(gig1);
+		System.out.println(band.showEvents());
+		System.out.println("Events nach recovery:");
+		band.undeleteEvent(gig1);
+		System.out.println(band.showEvents());
 	}
 }

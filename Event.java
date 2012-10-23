@@ -44,6 +44,18 @@ public abstract class Event{
 		return date;
 	}
 	
+	/**
+	 * Returns the list of the current member for this Event
+	 * 
+	 * @return	a ArrayList<Member> of members of the events
+	 */
+	
+	public ArrayList<Member> getMemberList(){
+		
+		return this.member;
+		
+	}
+	
 	public String getStringOfSongsPlayable(){
 		String playableSongs = "No Songs Playable";
 			
