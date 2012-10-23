@@ -9,7 +9,7 @@ public class Rehearsal extends Event{
 	
 	private int rent;
 
-	public Rehearsal(int duration, String location, Calendar date, int rent, ArrayList<Member> member){
+	public Rehearsal(int duration, Location location, Calendar date, int rent, ArrayList<Member> member){
 		super(duration, location, date, member);
 		
 		this.rent = rent;

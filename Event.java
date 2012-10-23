@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class Event{
 	
 	private int duration; //duration of the Event
-	private String location; //location of the Event
+	private Location location; //location of the Event
 	private Calendar date; //date AND time of the Event
 	private ArrayList<Member> member; //member who are playing at this Event
 	private ArrayList<Event> prevEvents;
@@ -17,7 +17,7 @@ public abstract class Event{
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
 	
-	public Event(int duration, String location, Calendar date, ArrayList<Member> member){
+	public Event(int duration, Location location, Calendar date, ArrayList<Member> member){
 		this.duration = duration;
 		this.location = location;
 		this.date = date;
@@ -25,7 +25,7 @@ public abstract class Event{
 		this.prevEvents = new ArrayList<Event>();
 	}
 	
-	public String getLocation(){
+	public Location getLocation(){
 		return location;
 	}
 	
@@ -42,6 +42,39 @@ public abstract class Event{
 		return date;
 	}
 	
+	public String getStringOfSongsPlayable(){
+		String playableSongs = "";
+			
+		Member theOne = member.get(0); //member must not be null!
+		
+		ArrayList<Song> pSongs = new ArrayList<Song>(theOne.getSongsList());
+		
+		
+		for(int m = 1; m < member.size(); m++){
+			if(member.get(m) == null){
+				return theOne.getSongsString();
+			}
+			for(int s = 0; s < pSongs.size(); s++){
+				if(member.get(m).getSongsList().contains(pSongs.get(s))){
+					pSongs.remove(s);	
+				}
+				
+				/*for(int i = 0; i < theOne.getSongsList().size(); i++){
+					if(theOne.getSongsList().get(i) == member.get(m).getSongsList().get(s)){
+						playableSongs += theOne.getSongsList().get(i) + "\n";
+					}
+				}*/
+			}
+		}
+		for(Song s : pSongs){
+			playableSongs += s.toString() + "\n";
+		}
+		
+		return playableSongs;
+	}
+	
+	
+	/*
 	public ArrayList<Song> getListOfSongsPlayable(){
 		ArrayList<Song> playableSongs = new ArrayList<Song>();
 		
@@ -63,7 +96,7 @@ public abstract class Event{
 		
 		return playableSongs;
 	}
-	
+	*/
 	/**
 	 * Sets an ArrayList<Event> that contains the previous versions of the events.
 	 * @param	eventList	an arraylist with the previous states of this event.
@@ -85,7 +118,7 @@ public abstract class Event{
 	}
 	
 	public String toString(){
-		return "Location: " + location + ", Duration: " + duration + ", Date: " + dateFormat.format(date.getTime());
+		return "Location: " + location.toString() + ", Duration: " + duration + ", Date: " + dateFormat.format(date.getTime());
 	}
 	
 }

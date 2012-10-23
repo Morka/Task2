@@ -68,6 +68,16 @@ public class Member {
 		return songList;
 	}
 	
+	public String getSongsString(){
+		String songs = "";
+		
+		for(Song s : songList){
+			songs += s.toString() + "\n";
+		}
+		
+		return songs;
+	}
+	
 	public String toString(){
 		return "Name: " + name + ", Instrument: " + instrument;
 	}

@@ -9,7 +9,7 @@ public class Gig extends Event{
 	
 	private int fee;
 	
-	public Gig(int duration, String location, Calendar date, int fee, ArrayList<Member> member){
+	public Gig(int duration, Location location, Calendar date, int fee, ArrayList<Member> member){
 		super(duration, location, date, member);
 		
 		this.fee = fee;
