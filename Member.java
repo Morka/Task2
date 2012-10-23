@@ -10,6 +10,7 @@ public class Member {
 	private String name, telNr, instrument;
 	private Calendar enteringDate, exitDate;
 	private ArrayList<Song> songList;
+	private ArrayList<Message> messageList;
 	
 	public Member(String memberName, String telNumber, String instrument){
 		
@@ -18,6 +19,7 @@ public class Member {
 		this.instrument = instrument;
 		this.enteringDate = Calendar.getInstance();
 		this.songList = new ArrayList<Song>();
+		this.messageList =  new ArrayList<Message>();
 	}
 	
 	/**
@@ -66,6 +68,13 @@ public class Member {
 	 */
 	public ArrayList<Song> getSongsList(){
 		return songList;
+	}
+	
+	/**
+	 * adds Message to Messages of the Member
+	 */
+	public void addMessage(String message){
+		messageList.add(new Message(message));
 	}
 	
 	public String getSongsString(){

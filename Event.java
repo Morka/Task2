@@ -13,6 +13,7 @@ public abstract class Event{
 	private Calendar date; //date AND time of the Event
 	private ArrayList<Member> member; //member who are playing at this Event
 	private ArrayList<Event> prevEvents;
+	private ArrayList<Message> eventMessages;
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -23,6 +24,7 @@ public abstract class Event{
 		this.date = date;
 		this.member = new ArrayList<Member>(member);
 		this.prevEvents = new ArrayList<Event>();
+		this.eventMessages = new ArrayList<Message>();
 	}
 	
 	public Location getLocation(){
@@ -112,4 +114,19 @@ public abstract class Event{
 		return "Location: " + location.toString() + ", Duration: " + duration + ", Date: " + dateFormat.format(date.getTime());
 	}
 	
+	/**
+	 * decline Event
+	 */
+	public void declineEvent(String message, Member member)
+	{
+		eventMessages.add(new EventMessage(message, member, State.DECLINE));
+	}
+
+	/**
+	 * accept Event
+	 */
+	public void acceptEvent(String message, Member member)
+	{
+		eventMessages.add(new EventMessage(message, member,  State.ACCEPT));
+	}	
 }
