@@ -65,13 +65,16 @@ public class Location{
 	public boolean neededInfrastructure(ArrayList<String> listOfNeededThings){
 		boolean hasEverything = true;
 		
-		
 		for(String s : listOfNeededThings){
 			if(!placeDescriptions.containsKey(s.toLowerCase())){
 				hasEverything = false;	
 			}					
 		}
-		
+
 		return hasEverything;
+	}
+	
+	public String toString(){
+		return name;
 	}
 }

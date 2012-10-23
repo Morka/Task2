@@ -29,6 +29,12 @@ public class Band {
 		
 	}
 	
+	public void addLocation(Location location){
+		
+		this.locationList.add(location);
+		
+	}
+	
 	/**
 	 * Adds an event to the event ArrayList
 	 * 
@@ -283,11 +289,24 @@ public class Band {
 		
 	}
 	
-	public void addLocation(Location location){
-		locationList.add(location);
+	public String searchForInfrastracture(ArrayList<String> listOfNeededThings){
+		String stringOfGoodLocations = "";
+		
+		if(listOfNeededThings == null){
+			stringOfGoodLocations = "Every Location is acceptable";
+		}
+		
+		for(Location l: this.locationList){
+			if(l.neededInfrastructure(listOfNeededThings) == true){
+				stringOfGoodLocations += l.toString() + "\n";
+			}
+		}
+		
+		return stringOfGoodLocations;
 	}
 	
-	public ArrayList<Location> infrastracture(ArrayList<String> listOfNeededThings){
+	/*
+	public ArrayList<Location> searchForInfrastracture(ArrayList<String> listOfNeededThings){
 		ArrayList<Location> listOfGoodLocations = new ArrayList<Location>();
 		
 		if(listOfNeededThings == null){
@@ -302,5 +321,5 @@ public class Band {
 		
 		return listOfGoodLocations;
 	}
-	
+	*/
 }
