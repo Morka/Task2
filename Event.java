@@ -57,7 +57,7 @@ public abstract class Event{
 	}
 	
 	public String getStringOfSongsPlayable(){
-		String playableSongs = "No Songs Playable";
+		String playableSongs = "";
 			
 		Member theOne = member.get(0); //member must not be null!
 		
@@ -76,6 +76,9 @@ public abstract class Event{
 		}
 		for(Song s : pSongs){
 			playableSongs += s.toString() + "\n";
+		}
+		if(playableSongs == ""){
+			return "No Songs Playable\n";
 		}
 		
 		return playableSongs;

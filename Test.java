@@ -64,10 +64,12 @@ public class Test{
 		Member member1 = new Member("John", "13221221", "Guitar");
 		Member member2 = new Member("Paul", "13221221", "Bass Guitar");
 		Member member3 = new Member("George", "13221223", "Guitar");
+		Member member4 = new Member("Ringo", "13221224", "Drums");
 		
 		band.addMember(member1);
 		band.addMember(member2);
 		band.addMember(member3);
+		band.addMember(member4);
 		
 		ArrayList<Member> memberList1 = new ArrayList<Member>();
 		memberList1.add(member1);
@@ -87,11 +89,33 @@ public class Test{
 		Gig gig2 = new Gig(200, location2, date, 100000, memberList1);
 		Rehearsal reh1 = new Rehearsal(90, location3, date, 50, memberList1);
 		
-		/*
+		/* 
+		 * THis should test if the programm "knows" which songs are playable
+		 * due to band members skills at gig1. All members know song 3
+		 *
 		 * Anticipated Output: "name: Help, length 21"
 		 */
-		System.out.println("Songs that are playable");
+		System.out.println("Songs that are playable gig1");
 		System.out.println(gig1.getStringOfSongsPlayable());
+		
+		/**
+		 * The Members of "memberList2" do not have a song which they can play together
+		 *
+		 */
+		ArrayList<Member> memberList2 = new ArrayList<Member>(memberList1);
+		
+		member4.addSongToList(song2);
+		member4.addSongToList(song1);
+		memberList2.add(member4);
+		
+		Gig gig3 = new Gig(2331, location2, date, 2993, memberList2);
+		/*
+		 * Anticipated Output: "No Songs Playable"
+		 */
+		
+		System.out.println("Songs that are playable Gig3");
+		System.out.println(gig3.getStringOfSongsPlayable());
+		
 		
 		band.addBudget("Drums",-600);
 		band.addBudget("Free Beer", 50);
