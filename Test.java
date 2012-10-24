@@ -84,47 +84,72 @@ public class Test{
 		member3.addSongToList(song3);
 		
 		Gig gig1 = new Gig(2500, location1, date, 2000000, memberList1);
+		Gig gig2 = new Gig(200, location2, date, 100000, memberList1);
+		Rehearsal reh1 = new Rehearsal(90, location3, date, 50, memberList1);
 		
-		/**
+		/*
 		 * Anticipated Output: "name: Help, length 21"
 		 */
 		System.out.println("Songs that are playable");
 		System.out.println(gig1.getStringOfSongsPlayable());
 		
-		/*
-
-		WHUT! WORKS BIATCHES!@
+		band.addBudget("Drums",-600);
+		band.addBudget("Free Beer", 50);
 		
-		Expected output from the test case below:
-
-		GIGS:
-		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
+		/*
+		
+		Expected output from the test case below:	
 
 		Aktuelle Events:
 		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
+		Location: Arena, Duration: 200, Date: 24.10.2012, Fee: 100000
+		Location: Posthof, Duration: 90, Date: 24.10.2012, Rent: 50
+		
 
 		Geaenderte Events:
+		Location: Arena, Duration: 200, Date: 24.10.2012, Fee: 100000
+		Location: Posthof, Duration: 90, Date: 24.10.2012, Rent: 50
 		Location: Arena, Duration: 2000, Date: 24.10.2012, Fee: 2000000
 
 		Rueckgaengiggemachte Eventaenderung:
+		Location: Arena, Duration: 200, Date: 24.10.2012, Fee: 100000
+		Location: Posthof, Duration: 90, Date: 24.10.2012, Rent: 50
 		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
 
 		Events nach loeschen:
+		Location: Arena, Duration: 200, Date: 24.10.2012, Fee: 100000
+		Location: Posthof, Duration: 90, Date: 24.10.2012, Rent: 50
 
 		Events nach recovery:
+		Location: Arena, Duration: 200, Date: 24.10.2012, Fee: 100000
+		Location: Posthof, Duration: 90, Date: 24.10.2012, Rent: 50
 		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
+		
+		Fees:
+		2000000
+		Rents:
+		0
+		Summe Sonstige Ein/Ausgaben:
+		-550
+		Summe Ein/Ausgaben fuer Kategorie Drums:
+		-600
+		Summe Ein/Ausgaben fuer Kategorie Free Beer:
+		50
 
 
 		 */
 		band.addEvent(gig1);
-		System.out.println("GIGS:");
-		System.out.println(band.showEvents());
-		Gig newGig = new Gig(2000, location2, date, 2000000, memberList1);
+		band.addEvent(gig2);
+		band.addEvent(reh1);
+		
 		System.out.println("Aktuelle Events:");
 		System.out.println(band.showEvents());
+		
+		Gig newGig = new Gig(2000, location2, date, 2000000, memberList1);
 		band.updateEvent(gig1, newGig);
 		System.out.println("Geaenderte Events:");
 		System.out.println(band.showEvents());
+		
 		band.undoEventChange(newGig, 0);
 		System.out.println("Rueckgaengiggemachte Eventaenderung:");
 		System.out.println(band.showEvents());
@@ -134,5 +159,16 @@ public class Test{
 		System.out.println("Events nach recovery:");
 		band.undeleteEvent(gig1);
 		System.out.println(band.showEvents());
+		
+		System.out.println("Summe Fees:");
+		System.out.println(Budget.getFees(band.getEventList(),date,date));
+		System.out.println("Summe Rents:");
+		System.out.println(Budget.getRents(band.getEventList(),date,date));
+		System.out.println("Summe Sonstige Ein/Ausgaben:");
+		System.out.println(Budget.getAllMisc(band.getBudgetList(),date,date));
+		System.out.println("Summe Ein/Ausgaben fuer Kategorie Drums:");
+		System.out.println(Budget.getMisc(band.getBudgetList(),"Drums",date,date));
+		System.out.println("Summe Ein/Ausgaben fuer Kategorie Free Beer:");
+		System.out.println(Budget.getMisc(band.getBudgetList(),"Free Beer",date,date));
 	}
 }

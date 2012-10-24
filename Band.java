@@ -13,6 +13,7 @@ public class Band {
 	private ArrayList<Event> deletedEventsList = new ArrayList<Event>();
 	private ArrayList<Song> songList = new ArrayList<Song>();
 	private ArrayList<Location> locationList = new ArrayList<Location>();
+	private ArrayList<Budget> budgetList = new ArrayList<Budget>();
 
 	public Band(){
 
@@ -260,6 +261,26 @@ public class Band {
 		return retString;
 
 	}
+	
+	/**
+	 * gets the current eventlist of the band
+	 * 
+	 * @return	ArrayList of Events
+	 */
+	public ArrayList<Event> getEventList()
+	{
+		return eventList;
+	}
+	
+	/**
+	 * gets the current budgetlist of the band
+	 * 
+	 * @return	ArrayList of Budget
+	 */
+	public ArrayList<Budget> getBudgetList()
+	{
+		return budgetList;
+	}
 
 	/**
 	 * Takes and old and a new event. Adds the old event to the oldEvent ArrayList and sets it in the new event
@@ -268,8 +289,9 @@ public class Band {
 	 * @param newEvent		the new event with the updated information
 	 */
 	public void updateEvent(Event originalEvent, Event newEvent){
-		ArrayList<Event> tmpList;
-		ArrayList<Member> eventMemberList;
+		ArrayList<Event> tmpList = new ArrayList<Event>();
+		ArrayList<Member> eventMemberList = new ArrayList<Member>();
+		Event oldEvent = null;
 
 		for(Event e : this.eventList){
 
@@ -285,12 +307,14 @@ public class Band {
 				tmpList = e.getPreviousEvents();
 				tmpList.add(originalEvent);
 				newEvent.setPreviousEvents(tmpList);
-				this.eventList.remove(e);
-				this.eventList.add(newEvent);
-
+				oldEvent = e;
+				break;
 			}
 
 		}
+		
+		this.eventList.remove(oldEvent);
+		this.eventList.add(newEvent);
 
 	}
 
@@ -437,6 +461,12 @@ public class Band {
 
 		return stringOfGoodLocations;
 	}
+	
+	public void addBudget(String name, int value)
+	{
+		budgetList.add(new Budget(name,value));	
+	}
+	
 
 	/*
 	public ArrayList<Location> searchForInfrastracture(ArrayList<String> listOfNeededThings){
