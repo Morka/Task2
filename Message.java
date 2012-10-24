@@ -10,4 +10,9 @@ public class Message
 		this.message = message;
 		date = Calendar.getInstance();
 	}
+	
+	public String toString()
+	{
+		return message;	
+	}
 }

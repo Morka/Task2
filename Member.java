@@ -77,6 +77,18 @@ public class Member {
 		messageList.add(new Message(message));
 	}
 	
+	public String getMessages()
+	{
+		String messages = "";
+		
+		for(Message s : messageList){
+			messages += s.toString() + "\n";
+		}
+		
+		return messages;
+	}
+		
+	
 	public String getSongsString(){
 		String songs = "";
 		

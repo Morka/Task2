@@ -96,6 +96,11 @@ public class Test{
 		band.addBudget("Drums",-600);
 		band.addBudget("Free Beer", 50);
 		
+		member1.addMessage("Hallo, wie geht es dir?");
+		member2.addMessage("Danke, gut. Und dir?");
+		member1.addMessage("Danke, mir auch");
+		
+		
 		/*
 		
 		Expected output from the test case below:	
@@ -159,6 +164,11 @@ public class Test{
 		System.out.println("Events nach recovery:");
 		band.undeleteEvent(gig1);
 		System.out.println(band.showEvents());
+		
+		/*System.out.println("Messages Mitglied 1:");
+		System.out.println(member1.getMessages());
+		System.out.println("Messages Mitglied 2:");
+		System.out.println(member2.getMessages());*/
 		
 		System.out.println("Summe Fees:");
 		System.out.println(Budget.getFees(band.getEventList(),date,date));
