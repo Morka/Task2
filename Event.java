@@ -141,4 +141,16 @@ public abstract class Event{
 	{
 		eventMessages.add(new EventMessage(message, member,  State.ACCEPT));
 	}	
+	
+	public String getMessages()
+	{
+		String messages = "";
+		
+		for(Message s : eventMessages){
+			messages += s.toString() + "\n";
+		}
+		
+		return messages;
+	}
+	
 }

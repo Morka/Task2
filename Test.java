@@ -100,6 +100,8 @@ public class Test{
 		member2.addMessage("Danke, gut. Und dir?");
 		member1.addMessage("Danke, mir auch");
 		
+		gig1.acceptEvent("termin ist perfekt", member1);
+		gig1.declineEvent("habe keine zeit", member2);
 		
 		/*
 		
@@ -168,7 +170,8 @@ public class Test{
 		/*System.out.println("Messages Mitglied 1:");
 		System.out.println(member1.getMessages());
 		System.out.println("Messages Mitglied 2:");
-		System.out.println(member2.getMessages());*/
+		System.out.println(member2.getMessages());
+		System.out.println(gig1.getMessages());*/
 		
 		System.out.println("Summe Fees:");
 		System.out.println(Budget.getFees(band.getEventList(),date,date));

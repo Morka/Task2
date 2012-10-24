@@ -102,5 +102,10 @@ public class Member {
 	public String toString(){
 		return "Name: " + name + ", Instrument: " + instrument;
 	}
+	
+	public String getName()
+	{
+		return name;
+	}
 
 }

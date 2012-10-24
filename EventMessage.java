@@ -9,6 +9,20 @@ public class EventMessage extends Message
 		this.member = member;
 		this.state = state;
 	}	
+	
+	public String toString()
+	{
+		String ret = "";
+		
+		ret += message + " Name: " + member.getName() + " State: ";
+		if(state == State.ACCEPT)
+			ret += "Accept";
+		else
+			ret += "Decline";
+		
+		return ret;
+	}
+		
 }
 
 
