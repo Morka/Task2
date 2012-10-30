@@ -157,7 +157,7 @@ public class Test{
 		Location: WUK, Duration: 2500, Date: 24.10.2012, Fee: 2000000
 		
 		Fees:
-		2000000
+		2100000
 		Rents:
 		0
 		Summe Sonstige Ein/Ausgaben:
@@ -198,14 +198,14 @@ public class Test{
 		System.out.println(gig1.getMessages());*/
 		
 		System.out.println("Summe Fees:");
-		System.out.println(Budget.getFees(band.getEventList(),date,date));
+		System.out.println(band.getFees(date,date));
 		System.out.println("Summe Rents:");
-		System.out.println(Budget.getRents(band.getEventList(),date,date));
+		System.out.println(band.getRents(date,date));
 		System.out.println("Summe Sonstige Ein/Ausgaben:");
-		System.out.println(Budget.getAllMisc(band.getBudgetList(),date,date));
+		System.out.println(band.getAllMisc(date,date));
 		System.out.println("Summe Ein/Ausgaben fuer Kategorie Drums:");
-		System.out.println(Budget.getMisc(band.getBudgetList(),"Drums",date,date));
+		System.out.println(band.getMisc("Drums",date,date));
 		System.out.println("Summe Ein/Ausgaben fuer Kategorie Free Beer:");
-		System.out.println(Budget.getMisc(band.getBudgetList(),"Free Beer",date,date));
+		System.out.println(band.getMisc("Free Beer",date,date));
 	}
 }

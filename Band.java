@@ -263,26 +263,6 @@ public class Band {
 	}
 	
 	/**
-	 * gets the current eventlist of the band
-	 * 
-	 * @return	ArrayList of Events
-	 */
-	public ArrayList<Event> getEventList()
-	{
-		return eventList;
-	}
-	
-	/**
-	 * gets the current budgetlist of the band
-	 * 
-	 * @return	ArrayList of Budget
-	 */
-	public ArrayList<Budget> getBudgetList()
-	{
-		return budgetList;
-	}
-
-	/**
 	 * Takes and old and a new event. Adds the old event to the oldEvent ArrayList and sets it in the new event
 	 * 
 	 * @param originalEvent	the original event we want to update
@@ -467,6 +447,109 @@ public class Band {
 		budgetList.add(new Budget(name,value));	
 	}
 	
+	//adds up all miscellaneous costs/revenues for period
+	public int getAllMisc(Calendar fromDate, Calendar toDate)
+	{
+		int sum = 0;
+		//Iterator<Budget> it = budgetList.iterator();
+		Calendar from = (Calendar)fromDate.clone();
+		from.add(Calendar.DAY_OF_MONTH, -1); 
+		Calendar to = (Calendar)toDate.clone();
+		to.add(Calendar.DAY_OF_MONTH, 1);
+		
+		for(Budget budget : budgetList){
+			if((budget.getDate().after(from)) && (budget.getDate().before(to)))
+				sum += budget.getValue();
+		
+		}
+		
+		/*while(it.hasNext())
+		{
+			Budget budget = it.next();
+			if((budget.getDate().after(from)) && (budget.getDate().before(to)))
+				sum += budget.getValue();
+		}*/
+		
+		return sum;
+	}
+	
+	//adds up all miscellaneous costs/revenues for specific category and period
+	public int getMisc(String category, Calendar fromDate, Calendar toDate)
+	{
+		int sum = 0;
+		//Iterator<Budget> it = budgetStack.iterator();
+		Calendar from = (Calendar)fromDate.clone();
+		from.add(Calendar.DAY_OF_MONTH, -1); 
+		Calendar to = (Calendar)toDate.clone();
+		to.add(Calendar.DAY_OF_MONTH, 1);
+		
+		for(Budget budget : budgetList){
+			if((budget.getDate().after(from)) && (budget.getDate().before(to)) && (category.equals(budget.getCategory())))
+				sum += budget.getValue();
+		
+		}
+		
+		/*while(it.hasNext())
+		{
+			Budget budget = it.next();
+			if((budget.getDate().after(from)) && (budget.getDate().before(to)) && (category.equals(budget.getCategory())))
+				sum += budget.getValue();
+		}*/
+		
+		return sum;
+	}	
+	
+	//adds up all rents for Events for period
+	public int getRents(Calendar fromDate, Calendar toDate)
+	{
+		int sum = 0;
+		//Iterator<Event> it = eventList.iterator();
+		Calendar from = (Calendar)fromDate.clone();
+		from.add(Calendar.DAY_OF_MONTH, -1); 
+		Calendar to = (Calendar)toDate.clone();
+		to.add(Calendar.DAY_OF_MONTH, 1);
+		
+		
+		for(Event e : eventList){
+			if((e instanceof Rehearsal) && (e.getDate().after(from)) && (e.getDate().before(to)))
+				sum += ((Rehearsal)e).getRent();	
+		}
+		
+		/*while(it.hasNext())
+		{
+			Event currentEvent = it.next();
+			if((currentEvent instanceof Rehearsal) && (currentEvent.getDate().after(from)) && (currentEvent.getDate().before(to)))
+				sum += ((Rehearsal)currentEvent).getRent();	
+		}*/
+		
+		return sum;
+	}
+	
+	
+	//adds up all fees for Events for period
+	public int getFees(Calendar fromDate, Calendar toDate)
+	{
+		int sum = 0;
+		//Iterator<Event> it = eventList.iterator();
+		Calendar from = (Calendar)fromDate.clone();
+		from.add(Calendar.DAY_OF_MONTH, -1); 
+		Calendar to = (Calendar)toDate.clone();
+		to.add(Calendar.DAY_OF_MONTH, 1);
+
+		for(Event e : eventList){
+			if((e instanceof Gig) && (e.getDate().after(from)) && (e.getDate().before(to)))
+				sum += ((Gig)e).getFee();
+		}
+		
+		/*while(it.hasNext())
+		{
+			Event currentEvent = it.next();
+			if((currentEvent instanceof Gig) && (currentEvent.getDate().after(from)) && (currentEvent.getDate().before(to)))
+				sum += ((Gig)currentEvent).getFee();	
+		}*/
+		
+		return sum;
+	}
 
 	/*
 	public ArrayList<Location> searchForInfrastracture(ArrayList<String> listOfNeededThings){
