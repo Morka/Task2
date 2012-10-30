@@ -2,8 +2,8 @@ import java.util.Calendar;
 import java.util.ArrayList;
 
 /**
- * @author Matthias Gusenbauer, Wolfgang Hofer, Alexander Neff
- */
+* @author Matthias Gusenbauer, Wolfgang Hofer, Alexander Neff
+*/
 
 public class Member {
 	
@@ -11,6 +11,7 @@ public class Member {
 	private Calendar enteringDate, exitDate;
 	private ArrayList<Song> songList;
 	private ArrayList<Message> messageList;
+	private ArrayList<VotingSystem> votes;
 	
 	public Member(String memberName, String telNumber, String instrument){
 		
@@ -20,12 +21,13 @@ public class Member {
 		this.enteringDate = Calendar.getInstance();
 		this.songList = new ArrayList<Song>();
 		this.messageList =  new ArrayList<Message>();
+		this.votes = new ArrayList<VotingSystem>();
 	}
 	
 	/**
-	 * sets the "exitDate" of the member to the current date
-	 *
-	 */
+	* sets the "exitDate" of the member to the current date
+	*
+	*/
 	
 	public void memberExit(){
 		
@@ -33,11 +35,22 @@ public class Member {
 		
 	}
 	
+	public void makeVote(String explanation, Calendar terminVorschlag,boolean answer){
+		VotingSystem vote = new VotingSystem(terminVorschlag, explanation, answer);
+		votes.add(vote);
+		
+	}
+	
+	public ArrayList<VotingSystem> getListOfVotes(){
+		return votes;
+	}
+	
+	
 	/**
-	 * Gives back a the "enteringDate" of the Member
-	 *
-	 * @return Calendar
-	 */
+	* Gives back a the "enteringDate" of the Member
+	*
+	* @return Calendar
+	*/
 	
 	public Calendar getEntryDate(){
 		
@@ -46,10 +59,10 @@ public class Member {
 	}
 	
 	/**
-	 * Gives back a the "exitDate" of the Member
-	 *
-	 * @return Calendar
-	 */
+	* Gives back a the "exitDate" of the Member
+	*
+	* @return Calendar
+	*/
 	
 	public Calendar getExitDate(){
 		
@@ -57,22 +70,22 @@ public class Member {
 		
 	}
 	/**
-	 *	Adds a song to the Repertoire of the Member
-	 */
+	*	Adds a song to the Repertoire of the Member
+	*/
 	public void addSongToList(Song song){
 		songList.add(song);
 	}
 	
 	/**
-	 * Gets the List of Songs, the member can play
-	 */
+	* Gets the List of Songs, the member can play
+	*/
 	public ArrayList<Song> getSongsList(){
 		return songList;
 	}
 	
 	/**
-	 * adds Message to Messages of the Member
-	 */
+	* adds Message to Messages of the Member
+	*/
 	public void addMessage(String message){
 		messageList.add(new Message(message));
 	}
@@ -87,7 +100,7 @@ public class Member {
 		
 		return messages;
 	}
-		
+	
 	
 	public String getSongsString(){
 		String songs = "";
@@ -107,5 +120,5 @@ public class Member {
 	{
 		return name;
 	}
-
+	
 }

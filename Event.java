@@ -1,6 +1,8 @@
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.PriorityQueue;
 
 /*
  * @author Matthias Gusenbauer, Wolfgang Hofer, Alexander Neff
@@ -42,6 +44,45 @@ public abstract class Event{
 	
 	public Calendar getDate(){
 		return date;
+	}
+	
+	public void getVotes(){
+		ArrayList<VotingSystem> votes = new ArrayList<VotingSystem>();
+		PriorityQueue<Calendar> calendarVotes = new PriorityQueue<Calendar>();
+		Calendar dateToBe = null; 
+		Calendar tmpDateToBe = null;
+		int countVotes = 0;
+		int highestVoteCount = 0;
+		
+		for(Member m : member){
+			votes = m.getListOfVotes();
+			for(VotingSystem v : votes){
+				if(v.getAnswer() == true){
+					calendarVotes.add(v.getDate());
+				}
+			}
+		}
+		
+		while(!calendarVotes.isEmpty()){
+			Calendar tmp = calendarVotes.poll();
+			if(tmpDateToBe == null){
+				dateToBe = tmp;
+				tmpDateToBe = tmp;
+				countVotes++;
+			}else if(tmpDateToBe == tmp){
+				countVotes++;
+			}else if(tmpDateToBe != tmp){
+				if(countVotes > highestVoteCount){
+					dateToBe = tmpDateToBe;
+					highestVoteCount = countVotes;
+				}else{
+					tmpDateToBe = tmp;
+					countVotes = 0;
+				}
+			}
+			
+		}
+		this.setDate(dateToBe);
 	}
 	
 	/**
@@ -132,6 +173,9 @@ public abstract class Event{
 	/**
 	 * decline Event
 	 */
+	
+	
+	 
 	public void declineEvent(String message, Member member)
 	{
 		eventMessages.add(new EventMessage(message, member, State.DECLINE));
