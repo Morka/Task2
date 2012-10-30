@@ -76,6 +76,20 @@ public class Test{
 		memberList1.add(member2);
 		memberList1.add(member3);
 		
+		
+		Calendar date1 = Calendar.getInstance();
+		Calendar date2 = Calendar.getInstance();
+		date2.add(Calendar.DAY_OF_MONTH, -5); //5 days before today
+		
+		/*
+		 * Members vote, which date they want! 
+		 */
+		
+		member1.makeVote("NOOOO HEY", date1, false);
+		member2.makeVote("YESSS HEY", date2, true);
+		member3.makeVote("NOOOO HEY", date1, false);
+		member1.makeVote("YESSS HEY", date2, true);
+		
 		member1.addSongToList(song1);
 		member1.addSongToList(song2);
 		member1.addSongToList(song3);
@@ -88,6 +102,18 @@ public class Test{
 		Gig gig1 = new Gig(2500, location1, date, 2000000, memberList1);
 		Gig gig2 = new Gig(200, location2, date, 100000, memberList1);
 		Rehearsal reh1 = new Rehearsal(90, location3, date, 50, memberList1);
+		
+		/* 
+		 * Votes are counted, and the date of the event is ajusted to date2 which
+		 * is favoured by the members
+		 *  
+		 * Anticipated Output: Location: WUK, Duration: 2500, Date: 25.10.2012, Fee: 2000000
+		 *
+		 * Actually, date of gig1 should be 5 days BEFORE today!!
+		 */
+		gig1.getVotes();
+		
+		System.out.println(gig1);
 		
 		/* 
 		 * THis should test if the programm "knows" which songs are playable
